@@ -22,8 +22,6 @@ jobs:
     permissions:
       contents: read
       issues: write
-      attestations: write
-      id-token: write
     with:
       deploy: true
       attest: false
@@ -37,6 +35,9 @@ jobs:
     name: Attest Tag
     needs: deploy
     uses: ./.github/workflows/attest-tag.yml
+    permissions:
+      attestations: write
+      id-token: write
     with:
       version: ${{ needs.deploy.outputs.version }}
       zip-path: ${{ needs.deploy.outputs.zip-path }}
